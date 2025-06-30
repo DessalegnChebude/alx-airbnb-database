@@ -32,6 +32,8 @@ CREATE TABLE Users (
     role ENUM('guest', 'host', 'admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+Properties Table
+
 CREATE TABLE Properties (
     property_id INT AUTO_INCREMENT PRIMARY KEY,
     host_id INT NOT NULL,
@@ -43,6 +45,8 @@ CREATE TABLE Properties (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_host FOREIGN KEY (host_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
+
+Bookings Table
 CREATE TABLE Bookings (
     booking_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT NOT NULL,
@@ -55,6 +59,7 @@ CREATE TABLE Bookings (
     CONSTRAINT fk_property FOREIGN KEY (property_id) REFERENCES Properties(property_id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
+Payments Table
 CREATE TABLE Payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     booking_id INT NOT NULL,
@@ -63,6 +68,7 @@ CREATE TABLE Payments (
     payment_method VARCHAR(50),
     CONSTRAINT fk_booking FOREIGN KEY (booking_id) REFERENCES Bookings(booking_id) ON DELETE CASCADE
 );
+Reviews Table
 CREATE TABLE Reviews (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT NOT NULL,
@@ -73,6 +79,7 @@ CREATE TABLE Reviews (
     CONSTRAINT fk_review_property FOREIGN KEY (property_id) REFERENCES Properties(property_id) ON DELETE CASCADE,
     CONSTRAINT fk_review_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
+Messages Table
 CREATE TABLE Messages (
     message_id INT AUTO_INCREMENT PRIMARY KEY,
     sender_id INT NOT NULL,
